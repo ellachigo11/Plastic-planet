@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plastic Planet - Learn to Recycle & Save Our Earth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 2rem 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.1)"></path></svg>') repeat-x;
+            opacity: 0.3;
+            animation: wave 20s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { background-position: 0 0; }
+            100% { background-position: 1200px 0; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #667eea;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+        }
+
+        .recycling-process {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .game-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .plastic-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .plastic-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .plastic-item:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+        }
+
+        .plastic-item.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .plastic-item.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .item-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 2rem;
+        }
+
+        .tips-section {
+            padding: 4rem 2rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #667eea;
+        }
+
+        .tip-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">♻️ Plastic Planet</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#facts">Facts</a></li>
+                <li><a href="#process">How It Works</a></li>
+                <li><a href="#game">Play Game</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>🌊 Save Our Planet from Plastic Waste</h1>
+            <p>Every year, 8 million tons of plastic end up in our oceans. But YOU can make a difference! Learn how to recycle plastic and protect our Earth.</p>
+            <button class="cta-button" onclick="document.getElementById('facts').scrollIntoView({behavior: 'smooth'})">Start Learning</button>
+        </div>
+    </section>
+
+    <section class="container" id="facts">
+        <h2 class="section-title">Shocking Plastic Facts</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">500</div>
+                <div class="stat-text">Years for plastic to decompose in landfills</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1M</div>
+                <div class="stat-text">Plastic bottles bought every minute worldwide</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">91%</div>
+                <div class="stat-text">Of plastic is NOT recycled</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5T</div>
+                <div class="stat-text">Trillion plastic pieces floating in our oceans</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="recycling-process" id="process">
+        <h2 class="section-title">How Plastic Recycling Works</h2>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Collection</h3>
+                <p>You put plastic items in recycling bins. Trucks collect them from homes and businesses.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Sorting</h3>
+                <p>Plastics are separated by type (PET, HDPE, etc.) using machines and workers.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Cleaning</h3>
+                <p>Plastic is washed to remove labels, glue, dirt, and any food residue.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Shredding</h3>
+                <p>Clean plastic is cut into small pieces called flakes or pellets.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <h3>Melting</h3>
+                <p>Plastic pieces are melted down and formed into pellets for manufacturing.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <h3>New Products</h3>
+                <p>Pellets are used to make new items like bottles, clothing, furniture, and more!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="game-section" id="game">
+        <h2 class="section-title">🎮 Plastic Sorting Challenge</h2>
+        <div class="game-container">
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 1rem;">Click on items that CAN be recycled!</p>
+            <div class="plastic-items" id="gameItems"></div>
+            <div class="score" id="score">Score: 0 / 0</div>
+            <button class="cta-button" style="display: block; margin: 2rem auto;" onclick="resetGame()">Play Again</button>
+        </div>
+    </section>
+
+    <section class="tips-section">
+        <div class="container">
+            <h2 class="section-title">Your Action Plan</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>✅ DO Recycle These</h3>
+                    <ul>
+                        <li>Water and soda bottles</li>
+                        <li>Milk jugs and detergent bottles</li>
+                        <li>Yogurt containers</li>
+                        <li>Shampoo and soap bottles</li>
+                        <li>Clean plastic bags (at special drop-offs)</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h3>❌ DON'T Recycle These</h3>
+                    <ul>
+                        <li>Plastic bags in regular bins</li>
+                        <li>Food-contaminated containers</li>
+                        <li>Styrofoam</li>
+                        <li>Plastic straws and utensils</li>
+                        <li>Chip bags and candy wrappers</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h3>🌟 Reduce Plastic Use</h3>
+                    <ul>
+                        <li>Use reusable water bottles</li>
+                        <li>Bring your own bags shopping</li>
+                        <li>Say no to plastic straws</li>
+                        <li>Buy products with less packaging</li>
+                        <li>Choose items in glass or metal</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h3>🎯 Make It a Habit</h3>
+                    <ul>
+                        <li>Set up recycling bins at home</li>
+                        <li>Rinse containers before recycling</li>
+                        <li>Check recycling symbols (1-7)</li>
+                        <li>Educate your friends and family</li>
+                        <li>Join local cleanup events</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>🌍 Together, we can reduce plastic waste and protect our planet!</p>
+        <p style="margin-top: 1rem; opacity: 0.9; font-weight: 500;">Created by the Okechukwu Family</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">Made with 💚 for our Earth | 2024</p>
+    </footer>
+
+    <script>
+        const gameItems = [
+            { name: 'Water Bottle', icon: '🍼', recyclable: true },
+            { name: 'Plastic Bag', icon: '🛍️', recyclable: false },
+            { name: 'Milk Jug', icon: '🥛', recyclable: true },
+            { name: 'Styrofoam', icon: '📦', recyclable: false },
+            { name: 'Shampoo Bottle', icon: '🧴', recyclable: true },
+            { name: 'Straw', icon: '🥤', recyclable: false },
+            { name: 'Yogurt Cup', icon: '🥣', recyclable: true },
+            { name: 'Chip Bag', icon: '🍟', recyclable: false }
+        ];
+
+        let score = 0;
+        let attempts = 0;
+
+        function initGame() {
+            const container = document.getElementById('gameItems');
+            container.innerHTML = '';
+            
+            gameItems.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'plastic-item';
+                itemDiv.innerHTML = `
+                    <div class="item-icon">${item.icon}</div>
+                    <div>${item.name}</div>
+                `;
+                itemDiv.onclick = () => checkAnswer(index, itemDiv);
+                container.appendChild(itemDiv);
+            });
+        }
+
+        function checkAnswer(index, element) {
+            if (element.classList.contains('correct') || element.classList.contains('incorrect')) {
+                return;
+            }
+
+            attempts++;
+            const item = gameItems[index];
+            
+            if (item.recyclable) {
+                element.classList.add('correct');
+                score++;
+            } else {
+                element.classList.add('incorrect');
+            }
+            
+            updateScore();
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = `Score: ${score} / ${attempts}`;
+        }
+
+        function resetGame() {
+            score = 0;
+            attempts = 0;
+            updateScore();
+            initGame();
+        }
+
+        initGame();
+    </script>
+</body>
+</html>
